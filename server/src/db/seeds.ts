@@ -1,13 +1,19 @@
 import { connectDatabase } from "./index";
-import faker from 'faker'
+import faker from 'faker';
 
-type User = { id: number, name: string, shortBio: string }
+interface User {
+  id: number;
+  name: string;
+  shortBio: string;
+  imageUrl: string;
+}
 
 const users: User[] = Array.apply(null, Array(100)).map((_, index: number) => ({
   id: index,
   name: faker.name.findName(),
-  shortBio: faker.company.catchPhrase()
-}))
+  shortBio: faker.company.catchPhrase(),
+  imageUrl: faker.image.avatar()
+}));
 
 const seed = async () => {
   try {

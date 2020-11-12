@@ -3,4 +3,5 @@ export default interface User {
   name: string;
   shortBio: string;
   isVerified: boolean;
+  imageUrl: string;
 }

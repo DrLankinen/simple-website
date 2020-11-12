@@ -13,6 +13,7 @@ export default function List(props: ListProps) {
         <tr>
           <th>Name</th>
           <th>ShortBio</th>
+          <th>image</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,7 @@ export default function List(props: ListProps) {
           <tr>
             <td>{user.name}</td>
             <td>{user.shortBio}</td>
+            <img src={user.imageUrl} width={128} height={128} />
           </tr>
         ))}
       </tbody>

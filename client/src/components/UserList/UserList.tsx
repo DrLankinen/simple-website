@@ -19,6 +19,7 @@ const GET_ROCKET_INVENTORY = gql`
       name
       shortBio
       isVerified
+      imageUrl
     }
   }
 `;
