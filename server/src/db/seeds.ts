@@ -1,11 +1,14 @@
 import { connectDatabase } from "./index";
+import faker from 'faker'
 
-const users = [
-  { id: 1, name: "Testov Testovic", shortBio: "I was born.", isVerified: false },
-  { id: 2, name: "Abe Betov", shortBio: "I also born.", isVerified: false },
-  { id: 3, name: "Cesar Julio", shortBio: "I later born.", isVerified: true },
+type Person = { id: number, name: String, shortBio: String }
 
-]
+const users: Person[] = Array.apply(null, Array(100)).map((_, index) => ({
+  id: index,
+  name: faker.name.findName(),
+  shortBio: faker.company.catchPhrase()
+}))
+
 const seed = async () => {
   try {
     console.log("[seed] : running...");
@@ -13,7 +16,7 @@ const seed = async () => {
     const db = await connectDatabase();
     db.users.clear();
 
-    await users.forEach(user => {
+    await users.forEach((user, index) => {
       db.users.create(user).save();
     });
 
