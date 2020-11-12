@@ -14,17 +14,25 @@ export default function Pagination(props: PaginationProps) {
 
   return (
     <div>
-      <button onClick={decreasePage}>-</button>
+      {currentPage !== 1 && <button style={styles.button} onClick={decreasePage}>-</button>}
       {Array.apply(null, Array(maxPage)).map((_, index) => (
-        <button style={styles.pageNumber(index + 1 === currentPage)} onClick={() => setPage(index + 1)}>{index + 1}</button>
-      ))}
-      <button onClick={increasePage}>+</button>
-    </div>
+        <button style={Object.assign({}, styles.pageNumber(index + 1 === currentPage), styles.button)} onClick={() => setPage(index + 1)}>{index + 1}</button>
+      ))
+      }
+      {currentPage !== maxPage && <button style={styles.button} onClick={increasePage}>+</button>}
+    </div >
   );
 }
 
 const styles = {
+  button: {
+    cursor: 'pointer'
+  },
   pageNumber: (isSelected: boolean) => ({
-    fontWeight: isSelected ? 1000 : 200
+    fontWeight: isSelected ? 1000 : 200,
+    width: 30,
+    height: 30,
+    marginLeft: 2,
+    marginRight: 2
   })
 }
