@@ -1,9 +1,9 @@
 import { connectDatabase } from "./index";
 import faker from 'faker'
 
-type Person = { id: number, name: String, shortBio: String }
+type User = { id: number, name: string, shortBio: string }
 
-const users: Person[] = Array.apply(null, Array(100)).map((_, index) => ({
+const users: User[] = Array.apply(null, Array(100)).map((_, index: number) => ({
   id: index,
   name: faker.name.findName(),
   shortBio: faker.company.catchPhrase()
@@ -16,7 +16,7 @@ const seed = async () => {
     const db = await connectDatabase();
     db.users.clear();
 
-    await users.forEach((user, index) => {
+    await users.forEach(user => {
       db.users.create(user).save();
     });
 
