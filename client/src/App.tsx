@@ -5,6 +5,8 @@ import { UserList } from './components/UserList/UserList';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache()
@@ -13,11 +15,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <header className="App-header">
-          <UserList />
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <UserList />
+          </header>
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }

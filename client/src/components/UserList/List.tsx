@@ -10,12 +10,12 @@ export default function List(props: ListProps) {
   return (
     <>
       {users.map(user => (
-        <div style={styles.userContainer}>
+        <div key={user.id} style={styles.userContainer}>
           <div style={styles.imgNameContainer}>
             <img style={styles.img} src={user.imageUrl} />
             <div style={styles.textContainer}>
               <p>{user.name}</p>
-              <p>{user.shortBio}</p>
+              <p style={styles.shortBio}>{user.shortBio}</p>
             </div>
           </div>
         </div>
@@ -45,4 +45,7 @@ const styles = {
     gridColumnEnd: 4,
     padding: 10
   },
+  shortBio: {
+    fontSize: 17
+  }
 }

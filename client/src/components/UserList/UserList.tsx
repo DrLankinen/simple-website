@@ -4,6 +4,7 @@ import Pagination from '../Pagination'
 import List from './List'
 import Filter from './Filter'
 import User from '../../interfaces/User'
+import { useLocation, useHistory } from 'react-router-dom';
 
 interface UserData {
   Users: User[];
@@ -44,12 +45,21 @@ export function UserList() {
     }
   }, [filteredUsers])
 
-  const [page, setPage] = useState(1)
+  const history = useHistory()
+  const location = useLocation()
+  const urlParams = new URLSearchParams(location.search)
+  const [page, setPage] = useState<number>(1)
   useEffect(() => {
-    if (page > maxPage) {
-      setPage(maxPage)
+    const newPage = parseInt(urlParams.get("page") || "1")
+    if (newPage > maxPage) {
+      urlParams.set("page", maxPage.toString())
+      history.push({
+        pathname: "/",
+        search: urlParams.toString()
+      })
     }
-  }, [maxPage])
+    setPage(newPage)
+  }, [maxPage, urlParams])
 
   return (
     <div style={styles.container}>
@@ -58,9 +68,9 @@ export function UserList() {
         <p>Loading ...</p>
       ) : (
           <>
-            <Filter users={data ? data.Users : []} setFilteredUsers={setFilteredUsers} />
+            <Filter allUsers={data ? data.Users : []} setFilteredUsers={setFilteredUsers} urlParams={urlParams} />
             <List users={filteredUsers.slice((page - 1) * RESULTS_PER_PAGE, page * RESULTS_PER_PAGE)} />
-            <Pagination setPage={setPage} currentPage={page} maxPage={maxPage} />
+            <Pagination currentPage={page} maxPage={maxPage} />
           </>
         )}
     </div>
