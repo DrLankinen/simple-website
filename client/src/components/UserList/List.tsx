@@ -8,23 +8,41 @@ interface ListProps {
 export default function List(props: ListProps) {
   const { users } = props
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>ShortBio</th>
-          <th>image</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map(user => (
-          <tr>
-            <td>{user.name}</td>
-            <td>{user.shortBio}</td>
-            <img src={user.imageUrl} width={128} height={128} />
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      {users.map(user => (
+        <div style={styles.userContainer}>
+          <div style={styles.imgNameContainer}>
+            <img style={styles.img} src={user.imageUrl} />
+            <div style={styles.textContainer}>
+              <p>{user.name}</p>
+              <p>{user.shortBio}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
   )
+}
+
+const styles = {
+  userContainer: {
+    marginBottom: 20,
+    border: '1px white solid',
+    borderRadius: 10
+  },
+  imgNameContainer: {
+    display: 'grid'
+  },
+  img: {
+    gridColumnStart: 1,
+    gridColumnEnd: 2,
+    width: 128,
+    height: 128,
+    padding: 10
+  },
+  textContainer: {
+    gridColumnStart: 2,
+    gridColumnEnd: 4,
+    padding: 10
+  },
 }

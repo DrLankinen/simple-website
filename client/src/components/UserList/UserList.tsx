@@ -52,7 +52,7 @@ export function UserList() {
   }, [maxPage])
 
   return (
-    <div>
+    <div style={styles.container}>
       <h3>Users</h3>
       {loading ? (
         <p>Loading ...</p>
@@ -65,4 +65,10 @@ export function UserList() {
         )}
     </div>
   );
+}
+
+const styles = {
+  container: {
+    maxWidth: 800
+  }
 }
