@@ -10,17 +10,17 @@ interface PaginationButton {
 
 function PaginationButton(props: PaginationButton) {
   const { page, children, isSelected } = props;
-  const history = useHistory()
-  const location = useLocation()
-  const urlParams = new URLSearchParams(location.search)
+  const history = useHistory();
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
 
   return (
     <button style={styles.paginationButton(isSelected || false)} onClick={() => {
-      urlParams.set("page", page.toString())
+      urlParams.set("page", page.toString());
       history.push({
         pathname: "/",
         search: urlParams.toString()
-      })
+      });
     }}>{children}</button>
   )
 }

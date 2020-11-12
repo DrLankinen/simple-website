@@ -18,13 +18,13 @@ interface FilterProps {
 export default function Filter(props: FilterProps) {
   const { allUsers, setFilteredUsers } = props;
 
-  const history = useHistory()
-  const location = useLocation()
-  const urlParams = new URLSearchParams(location.search)
-  const searchQuery: string = urlParams.get("search") || ""
-  const verifiedFilter: VerifiedFilterMode = urlParams.get("verified") as VerifiedFilterMode
+  const history = useHistory();
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const searchQuery: string = urlParams.get("search") || "";
+  const verifiedFilter: VerifiedFilterMode = urlParams.get("verified") as VerifiedFilterMode || VerifiedFilterMode.NONE;
 
-  const [searchInput, setSearchInput] = useState<string>("")
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const userFilter = (user: User) => {
     const name = user.name.toLowerCase();
@@ -47,10 +47,10 @@ export default function Filter(props: FilterProps) {
   }, [allUsers, searchQuery, verifiedFilter]);
 
   const changeUrlParamHelper = (key: string, value: string, deleteIfSame: string) => {
-    if (searchInput === deleteIfSame) {
-      urlParams.delete(key)
+    if (value === deleteIfSame) {
+      urlParams.delete(key);
     } else {
-      urlParams.set(key, value)
+      urlParams.set(key, value);
     }
     history.push({
       pathname: "/",
@@ -64,6 +64,7 @@ export default function Filter(props: FilterProps) {
         <input type="text" style={styles.searchBar} value={searchInput} placeholder="Search" onChange={(event) => setSearchInput(event.target.value)} />
         <button onClick={() => {
           changeUrlParamHelper("search", searchInput, "")
+          setSearchInput("")
         }}>Go</button>
       </div>
       <div style={styles.verificationFilter}>

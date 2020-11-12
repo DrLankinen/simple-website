@@ -26,7 +26,7 @@ const GET_ROCKET_INVENTORY = gql`
   }
 `;
 
-const RESULTS_PER_PAGE: number = 13
+const RESULTS_PER_PAGE: number = 13;
 
 export function UserList() {
   const { loading, data } = useQuery<UserData, UserVars>(
@@ -34,32 +34,32 @@ export function UserList() {
     {}
   );
 
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([])
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
-  const [maxPage, setMaxPage] = useState<number>(1)
+  const [maxPage, setMaxPage] = useState<number>(1);
   useEffect(() => {
     if (filteredUsers.length === 0) {
-      setMaxPage(1)
+      setMaxPage(1);
     } else {
-      setMaxPage(Math.ceil(filteredUsers.length / RESULTS_PER_PAGE))
+      setMaxPage(Math.ceil(filteredUsers.length / RESULTS_PER_PAGE));
     }
-  }, [filteredUsers])
+  }, [filteredUsers]);
 
-  const history = useHistory()
-  const location = useLocation()
-  const urlParams = new URLSearchParams(location.search)
-  const [page, setPage] = useState<number>(1)
+  const history = useHistory();
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const [page, setPage] = useState<number>(1);
   useEffect(() => {
-    const newPage = parseInt(urlParams.get("page") || "1")
+    const newPage = parseInt(urlParams.get("page") || "1");
     if (newPage > maxPage) {
-      urlParams.set("page", maxPage.toString())
+      urlParams.set("page", maxPage.toString());
       history.push({
         pathname: "/",
         search: urlParams.toString()
-      })
+      });
     }
-    setPage(newPage)
-  }, [maxPage, urlParams])
+    setPage(newPage);
+  }, [maxPage, urlParams]);
 
   return (
     <div style={styles.container}>
