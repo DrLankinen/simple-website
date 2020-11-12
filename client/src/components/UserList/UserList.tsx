@@ -25,7 +25,7 @@ const GET_ROCKET_INVENTORY = gql`
   }
 `;
 
-const RESULTS_PER_PAGE: number = 23
+const RESULTS_PER_PAGE: number = 3
 
 export function UserList() {
   const { loading, data } = useQuery<UserData, UserVars>(
@@ -69,6 +69,7 @@ export function UserList() {
 
 const styles = {
   container: {
-    maxWidth: 800
+    maxWidth: 800,
+    paddingBottom: 100
   }
 }
