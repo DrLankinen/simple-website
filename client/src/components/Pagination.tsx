@@ -7,10 +7,10 @@ interface PaginationProps {
 }
 
 export default function Pagination(props: PaginationProps) {
-  let { setPage, currentPage, maxPage } = props
+  let { setPage, currentPage, maxPage } = props;
 
-  const increasePage = () => setPage(Math.min(currentPage + 1, maxPage))
-  const decreasePage = () => setPage(Math.max(currentPage - 1, 1))
+  const increasePage = () => setPage(Math.min(currentPage + 1, maxPage));
+  const decreasePage = () => setPage(Math.max(currentPage - 1, 1));
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Pagination(props: PaginationProps) {
       ))}
       <button onClick={increasePage}>+</button>
     </div>
-  )
+  );
 }
 
 const styles = {
